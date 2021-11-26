@@ -86,4 +86,19 @@ Se você rodar o projeto e testar um domínio, verá que ele já está funcionan
 
 # Modificações:
 
-- DESCREVA AQUI O OBJETIVO DAS MODIFICAÇÕES...
+Foi feito o o upgrade para o .Net Core 6.0
+
+Foi criado uma aquitetura em n camadas das quais são: 
+Desafio.Umbler.Dominio {domain, classes que refletem o banco de dados}, 
+Desafio.Umbler.Infra.Data {contexto, migrations(faltou realocar essa parte)},
+Desafio.Umbler.Repository {acesso a dados, consultas e persistencia},
+Desafio.Umbler.Service {classes de negócio, onde se comunica com as classes de repository, recebendo e enviandos dados para as controllers}
+
+Em DomainController foi injetado a dependencia da classe de negocio e o autoMapper para fazer "de para" ViewModel e o dominio,
+caso haja alguma Exception isso agora é tratado na controller devolvendo um BadRequest, além disso se fosse o caso do desafio
+era interessante chamar uma rotina de log de erros para verificação futura.
+
+No FrontEnd foi feito um tratamento no retorno da requisição trazendo as informações legíveis, e tambem um tratamento de 
+campo vazio, impedindo uma requisição sem dados.
+
+foi aplicado 2 principios SOLID, Princípio da Segregação da Interface e Princípio da inversão da dependência
